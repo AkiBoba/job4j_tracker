@@ -2,7 +2,7 @@ language: java
 jdk:
   - openjdk14
 
-sudo: false
+sudo: false #
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
