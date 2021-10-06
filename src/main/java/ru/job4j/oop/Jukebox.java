@@ -5,8 +5,7 @@ public class Jukebox {
         String song;
         if (position == 1) {
             song = "Пусть бегут неуклюже";
-        }
-        if (position == 2) {
+        } else if (position == 2) {
             song = "Спокойной ночи";
         } else {
             song = "Песня не найдена";
@@ -16,6 +15,8 @@ public class Jukebox {
 
     public static void main(String[] args) {
         Jukebox song = new Jukebox();
+        song.music(1);
         song.music(2);
+        song.music(1000);
     }
 }
