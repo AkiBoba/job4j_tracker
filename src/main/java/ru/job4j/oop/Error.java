@@ -6,9 +6,12 @@ public class Error {
     private String message;
 
     public Error() {
-        active = true;
-        status = 1;
-        message = "sos";
+    }
+
+    public Error(boolean active, int status, String message) {
+        this.active = active;
+        this.status = status;
+        this.message =  message;
     }
 
     public void printInfo() {
@@ -18,17 +21,11 @@ public class Error {
     }
 
     public static void main(String[] args) {
-        Error error = new Error();
-        Error err = new Error();
-        err.message = "coc";
-        err.status = 2;
-        err.active = true;
         Error er = new Error();
-        er.message = "tos";
-        er.status = 3;
-        er.active = false;
-        error.printInfo();
-        err.printInfo();
+        Error error = new Error(true, 1, "sos");
+        Error err = new Error(false, 2, "exe");
         er.printInfo();
+        err.printInfo();
+        error.printInfo();
     }
 }
