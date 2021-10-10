@@ -1,6 +1,5 @@
 package ru.job4j.pojo;
 
-import java.util.Date;
 import java.time.LocalDateTime;
 /**
  * @author Vladimir Likhachev

@@ -2,7 +2,6 @@ package ru.job4j.pojo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 /**
  * @author Vladimir Likhachev
  */
