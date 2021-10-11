@@ -32,9 +32,8 @@ public class Library {
             System.out.println(book.getName() + " - " + book.getPages());
         }
         System.out.println("Books name is Clean code");
-        for (int index = 0; index < 4; index++) {
-            Book book = books[index];
-            if (book.getName() == "Clean code") {
+        for (Book book : books) {
+            if (book.getName().equals("Clean code")) {
                 System.out.println(book.getName() + " - " + book.getPages());
             }
         }
