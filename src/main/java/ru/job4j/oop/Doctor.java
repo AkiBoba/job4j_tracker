@@ -22,14 +22,3 @@ public class Doctor extends Profession {
     }
 }
 
-class Diagnosis extends Doctor {
-    private String equipment;
-
-    public Diagnosis(String name, String surname, String education,
-                     int birthday, String direction, String qualification, int experience) {
-        super(name, surname, education, birthday, direction, qualification, experience);
-    }
-
-    public void heal(String[] args) {
-    }
-}

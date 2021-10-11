@@ -21,12 +21,4 @@ public class Engineer extends Profession {
     }
 }
 
-class Chemical extends Engineer {
-    public Chemical(String name, String surname, String education,
-                    int birthday, String direction, String qualification, int experience) {
-        super(name, surname, education, birthday, direction, qualification, experience);
-    }
 
-    public void work(String[] args) {
-    }
-}
