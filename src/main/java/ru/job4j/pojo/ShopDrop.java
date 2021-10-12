@@ -11,9 +11,9 @@ public class ShopDrop {
                 if (ind != products.length - 1) {
                     products[ind] = products[ind + 1];
                 }
-                if (ind != products.length - 1) {
-                    products[ind] = products[ind + 1];
-                }
+            }
+            if (ind > index && ind != products.length - 1) {
+                products[ind] = products[ind + 1];
             }
         }
         products[products.length - 1] = null;
