@@ -8,9 +8,9 @@ public class Engineer extends Profession {
     private String qualification;
     private int experience;
 
-    public Engineer(String name, String surname, String education, int birthday, String direction,
+    public Engineer(String name, String surname, int birthday, String direction,
                     String qualification, int experience) {
-        super(name, surname, education, birthday);
+        super(name, surname, birthday);
         this.direction = direction;
         this.qualification = qualification;
         this.experience = experience;
