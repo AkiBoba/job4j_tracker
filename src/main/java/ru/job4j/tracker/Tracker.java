@@ -57,7 +57,6 @@ public class Tracker {
     }
 
     public boolean delete(int id) {
-        boolean result = false;
         int index = indexOf(id);
         boolean rsl = index != -1;
         if (rsl) {
@@ -65,7 +64,7 @@ public class Tracker {
             items[size - 1] = null;
             size--;
         }
-        return result;
+        return rsl;
     }
 }
 
