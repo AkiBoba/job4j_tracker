@@ -45,6 +45,7 @@ public class StartUITest {
 
     @Test
     public void whenDeleteItem() {
+
         Tracker tracker = new Tracker();
         Item item = new Item("new item");
         tracker.add(item);
