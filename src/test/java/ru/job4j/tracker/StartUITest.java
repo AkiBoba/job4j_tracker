@@ -50,7 +50,7 @@ public class StartUITest {
         Item item = new Item("new item");
         tracker.add(item);
         String[] answers = {
-                "1", "replaced item"
+                String.valueOf(item.getId())
         };
         StartUI.deteleItem(new StubInput(answers), tracker);
         Item replaced = tracker.findById(item.getId());
