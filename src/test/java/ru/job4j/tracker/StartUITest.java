@@ -6,6 +6,7 @@ import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.*;
 
 public class StartUITest {
+
     @Test
     public void whenCreateItem() {
         Input in = new StubInput(
