@@ -23,9 +23,7 @@ public class StartUITest {
     @Test
     public void whenReplaceItem() {
         Tracker tracker = new Tracker();
-        /* Добавим в tracker новую заявку */
         Item item = tracker.add(new Item("Replaced item"));
-        /* Входные данные должны содержать ID добавленной заявки item.getId() */
         int index = item.getId();
         String replacedName = "New item name";
         Input in = new StubInput(
@@ -42,9 +40,7 @@ public class StartUITest {
     @Test
     public void whenDeleteItem() {
         Tracker tracker = new Tracker();
-        /* Добавим в tracker новую заявку */
         Item item = tracker.add(new Item("Deleted item"));
-        /* Входные данные должны содержать ID добавленной заявки item.getId() */
         int index = item.getId();
         Input in = new StubInput(
                 new String[] {"0", String.valueOf(index), "1"}
