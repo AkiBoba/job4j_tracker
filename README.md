@@ -64,3 +64,4 @@
 # 0. Что такое исключение. [#3821]
 # 0.1. java.lang.NullPointerException [#219364]
 # 0.2. Кидаем исключение - throw new RuntimeException [#219365]
+# 0.3. Тестирование исключений с junit [#219366]
