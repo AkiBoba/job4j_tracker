@@ -5,6 +5,11 @@ public class Cat {
     private String food;
     private String name;
 
+    public String sound(String sound) {
+        String voice = sound;
+        return voice;
+    }
+
     public void show() {
         System.out.println(this.name);
         System.out.println(this.food);
@@ -15,7 +20,7 @@ public class Cat {
     }
 
     public void giveNick(String nick) {
-        this.name = "Nick";
+        this.name = nick;
     }
 
     public static void main(String[] args) {
@@ -29,5 +34,6 @@ public class Cat {
         black.giveNick("Black");
         black.eat("fish");
         black.show();
+        System.out.println(black.sound("gav-gav"));
     }
 }
