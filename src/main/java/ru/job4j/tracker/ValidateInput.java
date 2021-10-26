@@ -4,7 +4,6 @@ package ru.job4j.tracker;
  * @author Vladimir Likhachev
  */
 public class ValidateInput extends ConsoleInput {
-
     @Override
     public int askInt(String question) {
         boolean invalid = true;
