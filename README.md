@@ -74,3 +74,4 @@
 # 2.1. Тест на ValidateInput [#311887]
 # 3. Замена if-else-throw на if-throw [#49895]
 # 1. Singleton [#94606]
+# 2. final [#334073]
