@@ -34,12 +34,15 @@ public class ValidateInputTest {
     @Test
     public void whenMltValidInput() {
         Output out = new StubOutput();
+        String[] str = {"2", "1"};
         Input in = new StubInput(
-                new String[] {"2", "1"}
+               str
         );
-        ValidateInput input = new ValidateInput(out, in);
-        int selected = input.askInt("Enter menu:");
-        assertThat(out.toString(), is(""));
+        for (String i : str) {
+            ValidateInput input = new ValidateInput(out, in);
+            int selected = input.askInt("Enter menu:");
+            assertThat(selected, is(Integer.parseInt(i)));
+        }
     }
 
     @Test
