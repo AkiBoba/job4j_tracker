@@ -38,11 +38,11 @@ public class ValidateInputTest {
         Input in = new StubInput(
                str
         );
-        for (String i : str) {
-            ValidateInput input = new ValidateInput(out, in);
-            int selected = input.askInt("Enter menu:");
-            assertThat(selected, is(Integer.parseInt(i)));
-        }
+        ValidateInput input = new ValidateInput(out, in);
+        int selected = input.askInt("Enter menu:");
+        assertThat(selected, is(2));
+        selected = input.askInt("Enter menu:");
+        assertThat(selected, is(1));
     }
 
     @Test
