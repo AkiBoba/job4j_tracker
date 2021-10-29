@@ -75,3 +75,4 @@
 # 3. Замена if-else-throw на if-throw [#49895]
 # 1. Singleton [#94606] - 2
 # 2. final [#334073]
+# 0. Коллекции, ArrayList, List, Обобщения [#10094]
