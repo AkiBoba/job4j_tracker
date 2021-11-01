@@ -5,7 +5,6 @@ import java.util.List;
  * @author Vladimir Likhachev
  */
 public class ConvertList2Array {
-
     public static int[][] toArray(List<Integer> list, int cells) {
         int groups = (int) Math.ceil((double) list.size() / cells);
         int[][] array = new int[groups][cells];
