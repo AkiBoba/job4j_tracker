@@ -17,9 +17,9 @@ public class SortByNameItemTest {
     @Test
     public void compareTo() {
         List<Item> items = new ArrayList<>();
-        items.add(new Item(3,"Petr"));
-        items.add(new Item(6,"Ivan"));
-        items.add(new Item(1,"Jenya"));
+        items.add(new Item(3, "Petr"));
+        items.add(new Item(6, "Ivan"));
+        items.add(new Item(1, "Jenya"));
         Collections.sort(items);
         assertThat(items.get(0).getName(), is("Jenya"));
         assertThat(items.get(1).getName(), is("Petr"));
@@ -29,9 +29,9 @@ public class SortByNameItemTest {
     @Test
     public void compare() {
         List<Item> items = new ArrayList<>();
-        items.add(new Item(3,"Petr"));
-        items.add(new Item(6,"Ivan"));
-        items.add(new Item(1,"Jenya"));
+        items.add(new Item(3, "Petr"));
+        items.add(new Item(6, "Ivan"));
+        items.add(new Item(1, "Jenya"));
         Collections.sort(items, new  SortByNameItem());
         assertThat(items.get(1).getName(), is("Jenya"));
         assertThat(items.get(2).getName(), is("Petr"));
@@ -41,9 +41,9 @@ public class SortByNameItemTest {
     @Test
     public void compareReversed() {
         List<Item> items = new ArrayList<>();
-        items.add(new Item(3,"Petr"));
-        items.add(new Item(6,"Ivan"));
-        items.add(new Item(1,"Jenya"));
+        items.add(new Item(3, "Petr"));
+        items.add(new Item(6, "Ivan"));
+        items.add(new Item(1, "Jenya"));
         Collections.sort(items, new  SortByNameItem().reversed());
         assertThat(items.get(1).getName(), is("Jenya"));
         assertThat(items.get(0).getName(), is("Petr"));
