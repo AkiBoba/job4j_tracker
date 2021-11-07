@@ -3,7 +3,7 @@ package ru.job4j.tracker;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Item {
+public class Item implements Comparable<Item> {
 
     private static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
@@ -49,5 +49,10 @@ public class Item {
         return "Item{" + "id="
                 + id + ", name='"
                 + name + '\'' + '}';
+    }
+
+    @Override
+    public int compareTo(Item item) {
+        return Integer.compare(id, item.id);
     }
 }
