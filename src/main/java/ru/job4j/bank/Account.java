@@ -1,9 +1,7 @@
 package ru.job4j.bank;
 
 import java.util.Objects;
-/**
- * @author Vladimir Likhachev
- */
+
 public class Account {
     private String requisite;
     private double balance;

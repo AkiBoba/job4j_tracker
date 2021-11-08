@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,27 +16,17 @@ import static org.junit.Assert.*;
 public class SortByNameItemTest {
 
     @Test
-    public void compareTo() {
-        List<Item> items = new ArrayList<>();
-        items.add(new Item(3, "Petr"));
-        items.add(new Item(6, "Ivan"));
-        items.add(new Item(1, "Jenya"));
-        Collections.sort(items);
-        assertThat(items.get(0).getName(), is("Jenya"));
-        assertThat(items.get(1).getName(), is("Petr"));
-        assertThat(items.get(2).getName(), is("Ivan"));
-    }
-
-    @Test
     public void compare() {
+        Item first = new Item(1, "Jenya");
+        Item second = new Item(6, "Ivan");
+        Item third = new Item(3, "Petr");
         List<Item> items = new ArrayList<>();
-        items.add(new Item(3, "Petr"));
-        items.add(new Item(6, "Ivan"));
-        items.add(new Item(1, "Jenya"));
+        items.add(first);
+        items.add(second);
+        items.add(third);
+        List<Item> expected = List.of(second, first, third);
         Collections.sort(items, new  SortByNameItem());
-        assertThat(items.get(1).getName(), is("Jenya"));
-        assertThat(items.get(2).getName(), is("Petr"));
-        assertThat(items.get(0).getName(), is("Ivan"));
+        assertEquals(expected, items);
     }
 
     @Test
@@ -44,7 +35,7 @@ public class SortByNameItemTest {
         items.add(new Item(3, "Petr"));
         items.add(new Item(6, "Ivan"));
         items.add(new Item(1, "Jenya"));
-        Collections.sort(items, new  SortByNameItem().reversed());
+        Collections.sort(items, new SortByReversNameItem());
         assertThat(items.get(1).getName(), is("Jenya"));
         assertThat(items.get(0).getName(), is("Petr"));
         assertThat(items.get(2).getName(), is("Ivan"));
