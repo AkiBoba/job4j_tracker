@@ -15,7 +15,7 @@ public class JobTest {
     public void whenSortByPriority() {
         List<Job> list = new ArrayList<>();
         list.add(new Job("Impl task", 2));
-        list.add(new Job("Fix bug", 1));
+        list.add(new Job("Impl task", 1));
         list.sort(new JobSortByPriority());
         assertThat(list.get(0).getPriority(), is(1));
     }
@@ -24,7 +24,7 @@ public class JobTest {
     public void whenDescByPriority() {
         List<Job> list = new ArrayList<>();
         list.add(new Job("Impl task", 2));
-        list.add(new Job("Fix bug", 1));
+        list.add(new Job("mpl task", 1));
         list.sort(new JobDescByPriority());
         assertThat(list.get(0).getPriority(), is(2));
     }
