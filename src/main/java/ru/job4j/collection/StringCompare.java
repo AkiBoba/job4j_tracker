@@ -3,7 +3,6 @@ package ru.job4j.collection;
 import java.util.Comparator;
 
 public class StringCompare implements Comparator<String> {
-
     static int comchar(String left, String right) {
         int res = 0;
         for (int ind = 0; ind < left.length(); ind++) {
