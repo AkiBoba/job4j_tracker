@@ -5,7 +5,8 @@ import java.util.Comparator;
 public class StringCompare implements Comparator<String> {
     static int comchar(String left, String right) {
         int res = 0;
-        for (int ind = 0; ind < left.length(); ind++) {
+        int length = Math.min(left.length(), right.length());
+        for (int ind = 0; ind < length; ind++) {
             res = Character.compare(left.charAt(ind), right.charAt(ind));
             if (res != 0) {
                 break;
