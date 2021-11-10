@@ -17,10 +17,7 @@ public class StringCompare implements Comparator<String> {
 
     @Override
     public int compare(String left, String right) {
-        int resurs = comchar(left, right);
-        if (resurs == 0) {
-            resurs = Integer.compare(left.length(), right.length());
-        }
-        return resurs;
+        return comchar(left, right) != 0 ? comchar(left, right)
+                : Integer.compare(left.length(), right.length());
     }
 }
