@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Cat.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tracker</a> &gt; <a href="index.source.html" class="el_package">ru.job4j.oop</a> &gt; <span class="el_source">Cat.java</span></div><h1>Cat.java</h1><pre class="source lang-java linenums">package ru.job4j.oop;
+
+<span class="nc" id="L3">public class Cat {</span>
+
+    private String food;
+    private String name;
+
+    public String sound(String sound) {
+<span class="nc" id="L9">        String voice = sound;</span>
+<span class="nc" id="L10">        return voice;</span>
+    }
+
+    public void show() {
+<span class="nc" id="L14">        System.out.println(this.name);</span>
+<span class="nc" id="L15">        System.out.println(this.food);</span>
+<span class="nc" id="L16">    }</span>
+
+    public void eat(String meat) {
+<span class="nc" id="L19">        this.food = meat;</span>
+<span class="nc" id="L20">    }</span>
+
+    public void giveNick(String nick) {
+<span class="nc" id="L23">        this.name = nick;</span>
+<span class="nc" id="L24">    }</span>
+
+    public static void main(String[] args) {
+<span class="nc" id="L27">        System.out.println(&quot;There are gav's food.&quot;);</span>
+<span class="nc" id="L28">        Cat gav = new Cat();</span>
+<span class="nc" id="L29">        gav.giveNick(&quot;Gav&quot;);</span>
+<span class="nc" id="L30">        gav.eat(&quot;kotleta&quot;);</span>
+<span class="nc" id="L31">        gav.show();</span>
+<span class="nc" id="L32">        System.out.println(&quot;There are black's food.&quot;);</span>
+<span class="nc" id="L33">        Cat black = new Cat();</span>
+<span class="nc" id="L34">        black.giveNick(&quot;Black&quot;);</span>
+<span class="nc" id="L35">        black.eat(&quot;fish&quot;);</span>
+<span class="nc" id="L36">        black.show();</span>
+<span class="nc" id="L37">        System.out.println(black.sound(&quot;gav-gav&quot;));</span>
+<span class="nc" id="L38">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

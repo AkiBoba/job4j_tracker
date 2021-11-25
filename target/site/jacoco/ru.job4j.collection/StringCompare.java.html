@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StringCompare.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tracker</a> &gt; <a href="index.source.html" class="el_package">ru.job4j.collection</a> &gt; <span class="el_source">StringCompare.java</span></div><h1>StringCompare.java</h1><pre class="source lang-java linenums">package ru.job4j.collection;
+
+import java.util.Comparator;
+
+<span class="fc" id="L5">public class StringCompare implements Comparator&lt;String&gt; {</span>
+    static int comchar(String left, String right) {
+<span class="fc" id="L7">        int res = 0;</span>
+<span class="fc" id="L8">        int length = Math.min(left.length(), right.length());</span>
+<span class="fc bfc" id="L9" title="All 2 branches covered.">        for (int ind = 0; ind &lt; length; ind++) {</span>
+<span class="fc" id="L10">            res = Character.compare(left.charAt(ind), right.charAt(ind));</span>
+<span class="fc bfc" id="L11" title="All 2 branches covered.">            if (res != 0) {</span>
+<span class="fc" id="L12">                break;</span>
+            }
+        }
+<span class="fc" id="L15">        return res;</span>
+    }
+
+    @Override
+    public int compare(String left, String right) {
+<span class="fc" id="L20">        int resurs = comchar(left, right);</span>
+<span class="fc bfc" id="L21" title="All 2 branches covered.">        if (resurs == 0) {</span>
+<span class="fc" id="L22">            resurs = Integer.compare(left.length(), right.length());</span>
+        }
+<span class="fc" id="L24">        return resurs;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
