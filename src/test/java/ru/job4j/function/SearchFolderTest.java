@@ -1,7 +1,6 @@
 package ru.job4j.function;
 
 import org.junit.Test;
-
 import java.util.List;
 import java.util.function.Predicate;
 
