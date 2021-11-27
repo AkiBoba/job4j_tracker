@@ -2,8 +2,8 @@ package ru.job4j.function;
 
 import org.junit.Test;
 import java.util.List;
-import java.util.function.Predicate;
 
+import java.util.function.Predicate;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
