@@ -8,8 +8,7 @@ import java.util.function.Function;
  * @author Vladimir Likhachev
  */
 public class FuncDiapason {
-    List<Double> diapason(int start, int end, Function<Double,
-            Double> func) {
+    List<Double> diapason(int start, int end, Function<Double, Double> func) {
         List<Double> list = new ArrayList<>();
         for (int i = start; i < end; i++) {
             list.add(func.apply((double) i));
