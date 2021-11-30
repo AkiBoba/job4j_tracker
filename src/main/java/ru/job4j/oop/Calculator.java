@@ -8,25 +8,33 @@ public class Calculator {
     }
 
     public static int minus(int y) {
-        return  x - y;
+        return  y - x;
     }
 
-    public static int divide(int y) {
+    public int multiply(int y) {
+        return  y * x;
+    }
+
+    public int divide(int y) {
         return  y / x;
     }
 
     public int sumAllOperation(int y) {
-        return  sum(y) + minus(y) + divide(y);
+        return  sum(y) + minus(y)
+                + divide(y) + multiply(y);
     }
 
     public static void main(String[] args) {
+
         int result = sum(10);
+        Calculator calculator = new Calculator();
         System.out.println("Результат выполнения sum: " + result);
         result = minus(10);
         System.out.println("Результат выполнения minus: " + result);
-        result = divide(10);
+        result = calculator.multiply(10);
+        System.out.println("Результат выполнения multiply: " + result);
+        result = calculator.divide(10);
         System.out.println("Результат выполнения divide: " + result);
-        Calculator calculator = new Calculator();
         result = calculator.sumAllOperation(10);
         System.out.println("Результат выполнения sumAllOperation: " + result);
     }
