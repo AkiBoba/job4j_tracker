@@ -18,34 +18,34 @@ public class House {
         private int nomber;
         private int age;
 
-        Builder buildType (String type) {
+        Builder buildType(String type) {
             this.type = type;
             return this;
         }
 
-        Builder buildBrick (boolean brick) {
+        Builder buildBrick(boolean brick) {
             this.brick = brick;
             return this;
         }
 
-        Builder buildWooden (boolean wooden) {
+        Builder buildWooden(boolean wooden) {
             this.wooden = wooden;
             return this;
         }
 
-        Builder buildSections (int sections) {
+        Builder buildSections(int sections) {
             this.sections = sections;
             return this;
         }
-        Builder buildFloor (int floor) {
+        Builder buildFloor(int floor) {
             this.floor = floor;
             return this;
         }
-        Builder buildNomber (int nomber) {
+        Builder buildNomber(int nomber) {
             this.nomber = nomber;
             return this;
         }
-        Builder buildAge (int age) {
+        Builder buildAge(int age) {
             this.age = age;
             return this;
         }
