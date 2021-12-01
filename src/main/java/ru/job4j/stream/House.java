@@ -37,14 +37,17 @@ public class House {
             this.sections = sections;
             return this;
         }
+
         Builder buildFloor(int floor) {
             this.floor = floor;
             return this;
         }
+
         Builder buildNomber(int nomber) {
             this.nomber = nomber;
             return this;
         }
+
         Builder buildAge(int age) {
             this.age = age;
             return this;
