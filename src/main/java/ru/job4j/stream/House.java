@@ -55,15 +55,15 @@ public class House {
 
         @Override
         public String toString() {
-            return "Builder{" +
-                    "type='" + type + '\'' +
-                    ", brick=" + brick +
-                    ", wooden=" + wooden +
-                    ", sections=" + sections +
-                    ", floor=" + floor +
-                    ", nomber=" + nomber +
-                    ", age=" + age +
-                    '}';
+            return "Builder{"
+                    + "type='" + type + '\''
+                    + ", brick=" + brick
+                    + ", wooden=" + wooden
+                    + ", sections=" + sections
+                    + ", floor=" + floor
+                    + ", nomber=" + nomber
+                    + ", age=" + age
+                    + '}';
         }
     }
 
