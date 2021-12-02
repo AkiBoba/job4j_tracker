@@ -119,3 +119,4 @@ Stream API
 # 8. Перенос методов в Stream API [#279131] - 2
 # 9. Шаблоны проектирования в Stream API [#310012] - 2-
 # 0. Stream API улучшения [#58167] - 2
+# 2. Local-Variable Type Inference [#70626]
