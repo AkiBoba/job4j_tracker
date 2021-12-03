@@ -29,9 +29,12 @@ public class BankService {
      * @param account номер счета, который надо добавить
      */
     public void addAccount(String passport, Account account) {
-        Optional<User> user = Optional.of(findByPassport(passport));
-        if (!users.get(user.get()).contains(account)) {
-            users.get(user.get()).add(account);
+        Optional<User> user = findByPassport(passport);
+        if (user.isPresent()) {
+            List<Account> accounts = users.get(user.get());
+            if (!accounts.contains(account)) {
+                accounts.add(account);
+            }
         }
     }
 
@@ -40,12 +43,13 @@ public class BankService {
      * @param passport паспорт пользователя
      * @return возвращает пользователя или null, если он не найден
      */
-    public User findByPassport(String passport) {
-        return users.keySet()
+    public Optional<User> findByPassport(String passport) {
+        Optional<User> rsl = Optional.of(users.keySet()
                 .stream()
                 .filter(s -> s.getPassport().equals(passport))
-                .findFirst()
-                .orElse(null);
+                .findFirst()).get();
+
+        return rsl;
     }
 
     /**
@@ -54,39 +58,38 @@ public class BankService {
      * @param requisite номер счета
      * @return возвращает счет пользователя, иначе - null
      */
-    public Account findByRequisite(String passport, String requisite) {
-        User user = findByPassport(passport);
-        if (user != null) {
-
-            return users.get(user)
+    public Optional<Account> findByRequisite(String passport, String requisite) {
+        Optional<Account> res = Optional.empty();
+        Optional<User> user = findByPassport(passport);
+        if (user.isPresent()) {
+            res = users.get(user.get())
                     .stream()
                     .filter(s -> s.getRequisite().equals(requisite))
-                    .findFirst()
-                    .orElse(null);
+                    .findFirst();
         }
-        return null;
+        return res;
     }
 
-    /**
-     * Метод предназначен для перечисления денег с одного счёта на другой счёт
-     * @param srcPassport номер паспорта пользователя у которого списывают деньги
-     * @param srcRequisite номер счета на который переводят деньги
-     * @param destPassport номер паспорта пользователя у которого списывают деньги
-     * @param destRequisite номер счета  на который переводят деньги
-     * @param amount сумма переводимых денег
-     * @return возвращает результат сделки false - неудачно, true - успешно
-     */
-    public boolean transferMoney(String srcPassport, String srcRequisite,
-                                 String destPassport, String destRequisite, double amount) {
-        boolean rsl = false;
-        Optional<Account> srcAccount = Optional.of(findByRequisite(srcPassport, srcRequisite));
-        Optional<Account> destAccount = Optional.of(findByRequisite(destPassport, destRequisite));
-        if (srcAccount.isPresent()
-        && destAccount.isPresent() && srcAccount.get().getBalance() >= amount) {
-            srcAccount.get().setBalance(srcAccount.get().getBalance() - amount);
-            destAccount.get().setBalance(destAccount.get().getBalance() + amount);
-            rsl = true;
-        }
-        return rsl;
+        /**
+         * Метод предназначен для перечисления денег с одного счёта на другой счёт
+         * @param srcPassport номер паспорта пользователя у которого списывают деньги
+         * @param srcRequisite номер счета на который переводят деньги
+         * @param destPassport номер паспорта пользователя у которого списывают деньги
+         * @param destRequisite номер счета  на который переводят деньги
+         * @param amount сумма переводимых денег
+         * @return возвращает результат сделки false - неудачно, true - успешно
+         */
+        public boolean transferMoney(String srcPassport, String srcRequisite,
+                String destPassport, String destRequisite,double amount) {
+            boolean rsl = false;
+            Optional<Account> srcAccount = findByRequisite(srcPassport, srcRequisite);
+            Optional<Account> destAccount = findByRequisite(destPassport, destRequisite);
+            if (srcAccount.isPresent()
+                    && destAccount.isPresent() && srcAccount.get().getBalance() >= amount) {
+                srcAccount.get().setBalance(srcAccount.get().getBalance() - amount);
+                destAccount.get().setBalance(destAccount.get().getBalance() + amount);
+                rsl = true;
+            }
+            return rsl;
     }
 }
