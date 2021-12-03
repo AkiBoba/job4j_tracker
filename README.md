@@ -120,4 +120,4 @@ Stream API
 # 9. Шаблоны проектирования в Stream API [#310012] - 2-
 # 0. Stream API улучшения [#58167] - 2 -
 # 2. Local-Variable Type Inference [#70626]
-# 3. Optional в банковских переводах. [#214711]
+# 3. Optional в банковских переводах. [#214711] -
