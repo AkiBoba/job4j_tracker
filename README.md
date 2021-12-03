@@ -122,4 +122,4 @@ Stream API
 # 2. Local-Variable Type Inference [#70626]
 # 3. Optional в банковских переводах. [#214711] -
 # 4. Optional в Stream API. [#279130]
-# 4. Optional в Stream API. [#279130 #235488]
+# 4. Optional в Stream API. [#279130 #235488] -

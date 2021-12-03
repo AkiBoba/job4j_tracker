@@ -80,7 +80,7 @@ public class BankService {
          * @return возвращает результат сделки false - неудачно, true - успешно
          */
         public boolean transferMoney(String srcPassport, String srcRequisite,
-                String destPassport, String destRequisite,double amount) {
+                String destPassport, String destRequisite, double amount) {
             boolean rsl = false;
             Optional<Account> srcAccount = findByRequisite(srcPassport, srcRequisite);
             Optional<Account> destAccount = findByRequisite(destPassport, destRequisite);
