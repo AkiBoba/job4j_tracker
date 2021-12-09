@@ -7,12 +7,12 @@ public class Departments {
     public static List<String> fillGaps(List<String> deps) {
         Set<String> tmp = new LinkedHashSet<>();
         for (String value : deps) {
-            StringBuilder start = new StringBuilder(value.split("/")[0]);
-            tmp.add(start.toString());
+            String start = value.split("/")[0];
+            tmp.add(start);
             int len = value.split("/").length;
             for (int i = 1; i < len; i++) {
                 tmp.add(start + "/" + value.split("/")[i]);
-                start.append("/").append(value.split("/")[i]);
+                start += "/" + value.split("/")[i];
             }
         }
         return new ArrayList<>(tmp);
@@ -23,5 +23,6 @@ public class Departments {
     }
 
     public static void sortDesc(List<String> orgs) {
+        orgs.sort(new DepDescComp());
     }
 }

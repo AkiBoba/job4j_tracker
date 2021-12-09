@@ -50,7 +50,7 @@ public class DepartmentsTest {
                 "K2/SK1/SSK1", "K2/SK1/SSK2");
         List<String> expect = Arrays.asList("K2", "K2/SK1", "K2/SK1/SSK1",
                 "K2/SK1/SSK2", "K1", "K1/SK1", "K1/SK1/SSK1", "K1/SK1/SSK2", "K1/SK2");
-        input.sort(new DepDescComp());
+        Departments.sortDesc(input);
         assertThat(input, is(expect));
     }
 }
