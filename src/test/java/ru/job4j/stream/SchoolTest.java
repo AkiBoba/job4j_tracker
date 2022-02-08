@@ -46,6 +46,7 @@ public class SchoolTest {
         expected.add(new Student(50, "Surname5"));
         expected.add(new Student(60, "Surname6"));
         assertThat(rsl, is(expected));
+
     }
 
     @Test
