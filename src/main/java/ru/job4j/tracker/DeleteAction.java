@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.sql.SQLException;
+
 public class DeleteAction implements UserAction {
     private final Output out;
 
@@ -13,7 +15,7 @@ public class DeleteAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Store store) {
+    public boolean execute(Input input, Store store) throws SQLException {
         out.println("=== Delete item ===");
         int id = input.askInt("Enter id: ");
         if (store.delete(id)) {
