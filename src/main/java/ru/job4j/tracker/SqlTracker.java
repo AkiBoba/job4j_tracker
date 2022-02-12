@@ -11,6 +11,10 @@ public class SqlTracker implements Store, AutoCloseable {
 
     private Connection cn;
 
+    public SqlTracker() {
+        init();
+    }
+
     public void init() {
         try (InputStream in = SqlTracker
                 .class
@@ -39,9 +43,9 @@ public class SqlTracker implements Store, AutoCloseable {
     @Override
     public Item add(Item item) throws SQLException {
         try (PreparedStatement ps = cn.prepareStatement(
-                "insert into items(name, created) values (?, ?)")) {
+                "insert into items(name, created) values (?, ?);")) {
             ps.setString(1, item.getName());
-            ps.setString(2, Timestamp.valueOf(item.getCreated()).toString());
+            ps.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
             ps.execute();
         }
         return item;
@@ -49,33 +53,31 @@ public class SqlTracker implements Store, AutoCloseable {
 
     @Override
     public boolean replace(int id, Item item) throws SQLException {
-        boolean result = true;
-        try (var statement = cn.createStatement()) {
-            var selection = statement.executeQuery(String.format(
-                            "select id from items where id = ?", id
-                    )
-            );
-            if (!selection.next()) {
-                result = false;
+        boolean result = false;
+        try (PreparedStatement ps = cn.prepareStatement(
+                "select id from items where id = ?;")) {
+            ps.setInt(1, id);
+            ResultSet res = ps.executeQuery();
+            if (res.next()) {
+            try (PreparedStatement pst = cn.prepareStatement(
+                    "update items set name =?, created = ? where id = ?;")) {
+                pst.setInt(3, id);
+                pst.setString(1, item.getName());
+                pst.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
+                result = pst.executeUpdate() > 0;
+                }
             }
-            statement.executeQuery(String.format(
-                            "update items set name = ?, created = ? where id = ?",
-                            item.getName(),
-                            Timestamp.valueOf(item.getCreated()).toString(),
-                            item.getId()
-                    )
-            );
         }
         return result;
+
     }
 
     @Override
     public boolean delete(int id) throws SQLException {
-        boolean result = false;
+        boolean result;
         try (PreparedStatement ps = cn.prepareStatement(
-                "delete users items where id = ?")) {
+                "delete from items where id = ?;")) {
             ps.setInt(1, id);
-            ps.execute();
             result = ps.executeUpdate() > 0;
         }
         return result;
@@ -86,14 +88,15 @@ public class SqlTracker implements Store, AutoCloseable {
         List<Item> list = new ArrayList<>();
         try (var statement = cn.createStatement()) {
             var selection = statement.executeQuery(
-                    "select * from items"
+                    "select * from items;"
             );
             while (selection.next()) {
                 list.add(new  Item(selection.getInt(1),
-                                selection.getString(2),
-                                getLocalDateTime(selection
-                                        .getTimestamp(3))
+                    selection.getString(2),
+                    getLocalDateTime(selection
+                        .getTimestamp(3)
                         )
+                    )
                 );
             }
         }
@@ -103,17 +106,17 @@ public class SqlTracker implements Store, AutoCloseable {
     @Override
     public List<Item> findByName(String key) throws SQLException {
         List<Item> list = new ArrayList<>();
-        try (var statement = cn.createStatement()) {
-            var selection = statement.executeQuery(String.format(
-                    "select * from items where name = ?", key
-                    )
-            );
-            while (selection.next()) {
-                list.add(new  Item(selection.getInt(1),
-                                selection.getString(2),
-                                getLocalDateTime(selection
-                                        .getTimestamp(3))
+        try (PreparedStatement ps = cn.prepareStatement(
+                "select * from items where name = ?;")) {
+            ps.setString(1, key);
+            ResultSet res = ps.executeQuery();
+            while (res.next()) {
+                list.add(new Item(res.getInt(1),
+                     res.getString(2),
+                     getLocalDateTime(res.
+                        getTimestamp(3)
                         )
+                    )
                 );
             }
         }
@@ -122,20 +125,17 @@ public class SqlTracker implements Store, AutoCloseable {
 
     @Override
     public Item findById(int id) throws SQLException {
-        Item item = null;
-        try (var statement = cn.createStatement()) {
-            var selection = statement.executeQuery(String.format(
-                            "select * from items where id = ?", id
-                    )
-            );
-            if (selection.next()) {
-                 item = new Item(selection.getInt(1),
-                     selection.getString(2),
-                     getLocalDateTime(selection
-                        .getTimestamp(3)
+        Item item;
+        try (PreparedStatement ps = cn.prepareStatement(
+             "select * from items where id = ?;")) {
+             ps.setInt(1, id);
+             ResultSet res = ps.executeQuery();
+             item = new  Item(res.getInt(1),
+                res.getString(2),
+                getLocalDateTime(res
+                    .getTimestamp(3)
                      )
                 );
-            }
         }
         return item;
     }
