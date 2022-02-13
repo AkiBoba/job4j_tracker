@@ -45,7 +45,7 @@ public class SqlTracker implements Store, AutoCloseable {
     }
 
     @Override
-    public Item add(Item item) throws SQLException {
+    public Item add(Item item) {
         try (PreparedStatement ps = cn.prepareStatement(
                 "insert into items(name, created) values (?, ?);",
                 Statement.RETURN_GENERATED_KEYS)) {
@@ -57,12 +57,14 @@ public class SqlTracker implements Store, AutoCloseable {
                     item.setId(generatedKeys.getInt(1));
                 }
             }
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
         }
         return item;
     }
 
     @Override
-    public boolean replace(int id, Item item) throws SQLException {
+    public boolean replace(int id, Item item) {
         boolean result;
         try (PreparedStatement pst = cn.prepareStatement(
              "update items set name =?, created = ? where id = ?;")) {
@@ -70,66 +72,82 @@ public class SqlTracker implements Store, AutoCloseable {
              pst.setString(1, item.getName());
              pst.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
              result = pst.executeUpdate() > 0;
-            }
+            } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
         return result;
     }
 
     @Override
-    public boolean delete(int id) throws SQLException {
+    public boolean delete(int id) {
         boolean result;
         try (PreparedStatement ps = cn.prepareStatement(
                 "delete from items where id = ?;")) {
             ps.setInt(1, id);
             result = ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
         }
         return result;
     }
 
     @Override
-    public List<Item> findAll() throws SQLException {
+    public List<Item> findAll() {
         List<Item> list = new ArrayList<>();
-        try (var statement = cn.createStatement()) {
-            var selection = statement.executeQuery(
-                    "select * from items;"
-            );
-            while (selection.next()) {
-                list.add(new  Item(selection.getInt(1),
-                    selection.getString(2),
-                    getLocalDateTime(selection
-                        .getTimestamp(3)
-                        )
-                    )
-                );
+        try (PreparedStatement ps = cn.prepareStatement(
+                    "select * from items;")) {
+            try {
+                ResultSet res = ps.executeQuery();
+                while (res.next()) {
+                    list.add(newItem(res)
+                    );
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
             }
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
         }
         return list;
     }
 
     @Override
-    public List<Item> findByName(String key) throws SQLException {
+    public List<Item> findByName(String key) {
         List<Item> list = new ArrayList<>();
         try (PreparedStatement ps = cn.prepareStatement(
                 "select * from items where name = ?;")) {
             ps.setString(1, key);
-            ResultSet res = ps.executeQuery();
-            while (res.next()) {
-                list.add(newItem(res)
-                );
+            try {
+                ResultSet res = ps.executeQuery();
+                while (res.next()) {
+                    list.add(newItem(res)
+                    );
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
             }
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
         }
         return list;
     }
 
     @Override
-    public Item findById(int id) throws SQLException {
+    public Item findById(int id) {
         Item item = null;
         try (PreparedStatement ps = cn.prepareStatement(
              "select * from items where id = ?;")) {
              ps.setInt(1, id);
-             ResultSet res = ps.executeQuery();
-             if (res.next()) {
-                 item = newItem(res);
+             try {
+                 ResultSet res = ps.executeQuery();
+                 if (res.next()) {
+                     item = newItem(res);
+                 }
+             } catch (SQLException throwables) {
+                 throwables.printStackTrace();
              }
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
         }
         return item;
     }
