@@ -96,14 +96,11 @@ public class SqlTracker implements Store, AutoCloseable {
         List<Item> list = new ArrayList<>();
         try (PreparedStatement ps = cn.prepareStatement(
                     "select * from items;")) {
-            try {
-                ResultSet res = ps.executeQuery();
+            try (ResultSet res = ps.executeQuery()) {
                 while (res.next()) {
                     list.add(newItem(res)
                     );
                 }
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
             }
         } catch (Exception e) {
             throw new IllegalStateException(e);
@@ -117,14 +114,11 @@ public class SqlTracker implements Store, AutoCloseable {
         try (PreparedStatement ps = cn.prepareStatement(
                 "select * from items where name = ?;")) {
             ps.setString(1, key);
-            try {
-                ResultSet res = ps.executeQuery();
+            try (ResultSet res = ps.executeQuery()) {
                 while (res.next()) {
                     list.add(newItem(res)
                     );
                 }
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
             }
         } catch (Exception e) {
             throw new IllegalStateException(e);
@@ -138,13 +132,10 @@ public class SqlTracker implements Store, AutoCloseable {
         try (PreparedStatement ps = cn.prepareStatement(
              "select * from items where id = ?;")) {
              ps.setInt(1, id);
-             try {
-                 ResultSet res = ps.executeQuery();
+             try (ResultSet res = ps.executeQuery()) {
                  if (res.next()) {
                      item = newItem(res);
                  }
-             } catch (SQLException throwables) {
-                 throwables.printStackTrace();
              }
         } catch (Exception e) {
             throw new IllegalStateException(e);
