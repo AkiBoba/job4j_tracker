@@ -33,7 +33,7 @@ public class SqlTracker implements Store, AutoCloseable {
                     config.getProperty("password")
             );
         } catch (Exception e) {
-            throw new IllegalStateException(e);
+            e.printStackTrace();
         }
     }
 
@@ -58,14 +58,14 @@ public class SqlTracker implements Store, AutoCloseable {
                 }
             }
         } catch (Exception e) {
-            throw new IllegalStateException(e);
+            e.printStackTrace();
         }
         return item;
     }
 
     @Override
     public boolean replace(int id, Item item) {
-        boolean result;
+        boolean result = false;
         try (PreparedStatement pst = cn.prepareStatement(
              "update items set name =?, created = ? where id = ?;")) {
              pst.setInt(3, id);
@@ -73,20 +73,20 @@ public class SqlTracker implements Store, AutoCloseable {
              pst.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
              result = pst.executeUpdate() > 0;
             } catch (Exception e) {
-            throw new IllegalStateException(e);
+            e.printStackTrace();
         }
         return result;
     }
 
     @Override
     public boolean delete(int id) {
-        boolean result;
+        boolean result = false;
         try (PreparedStatement ps = cn.prepareStatement(
                 "delete from items where id = ?;")) {
             ps.setInt(1, id);
             result = ps.executeUpdate() > 0;
         } catch (Exception e) {
-            throw new IllegalStateException(e);
+            e.printStackTrace();
         }
         return result;
     }
@@ -103,7 +103,7 @@ public class SqlTracker implements Store, AutoCloseable {
                 }
             }
         } catch (Exception e) {
-            throw new IllegalStateException(e);
+            e.printStackTrace();
         }
         return list;
     }
@@ -121,7 +121,7 @@ public class SqlTracker implements Store, AutoCloseable {
                 }
             }
         } catch (Exception e) {
-            throw new IllegalStateException(e);
+            e.printStackTrace();
         }
         return list;
     }
@@ -138,7 +138,7 @@ public class SqlTracker implements Store, AutoCloseable {
                  }
              }
         } catch (Exception e) {
-            throw new IllegalStateException(e);
+            e.printStackTrace();
         }
         return item;
     }
