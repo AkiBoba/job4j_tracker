@@ -74,12 +74,8 @@ public class SqlTrackerTest {
     public void whenDeleteItem() throws SQLException {
         SqlTracker tracker = new SqlTracker(connection);
         Item item1 = new Item("item1");
-        Item item2 = new Item("item2");
-        Item item3 = new Item("item3");
         tracker.add(item1);
-        tracker.add(item2);
-        tracker.add(item3);
-        int id = item2.getId();
+        int id = item1.getId();
         tracker.delete(id);
         assertThat(tracker.findById(id), is(IsNull.nullValue()));
     }
@@ -88,10 +84,8 @@ public class SqlTrackerTest {
     public void whenReplace() throws SQLException {
         SqlTracker tracker = new SqlTracker(connection);
         Item item1 = new Item("item1");
-        Item item2 = new Item("item2");
         Item bugItem = new Item("Bug");
         tracker.add(item1);
-        tracker.add(item2);
         int id = item1.getId();
         tracker.replace(id, bugItem);
         assertThat(tracker.findById(id).getName(), is("Bug"));
@@ -106,9 +100,8 @@ public class SqlTrackerTest {
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
-        List<Item> result = tracker.findAll();
-        assertThat(result.get(0).getName(), is(item1.getName()));
-        assertThat(result.size(), is(3));
+        List<Item> result = List.of(item1, item2, item3);
+        assertThat(tracker.findAll(), is(result));
     }
 
     @Test
@@ -116,14 +109,12 @@ public class SqlTrackerTest {
         SqlTracker tracker = new SqlTracker(connection);
         Item item1 = new Item("item1");
         Item item2 = new Item("item2");
-        Item item3 = new Item("item3");
-        tracker.add(item1);
+        Item item3 = new Item("item1");
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
-        tracker.add(item1);
         List<Item> result = tracker.findByName(item1.getName());
-        assertThat(result.size(), is(3));
+        assertThat(result.size(), is(2));
     }
 
     @Test
@@ -131,28 +122,21 @@ public class SqlTrackerTest {
         SqlTracker tracker = new SqlTracker(connection);
         Item item1 = new Item("item1");
         Item item2 = new Item("item2");
-        Item item3 = new Item("item3");
-        tracker.add(item1);
+        Item item3 = new Item("item1");
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
-        tracker.add(item1);
-        List<Item> result = tracker.findByName(item1.getName());
-        assertThat(result.get(1).getName(), is(item1.getName()));
+        List<Item> result = List.of(item1, item3);
+        assertThat(tracker.findByName(item1.getName()), is(result));
     }
 
     @Test
     public void whenTestFindById() throws SQLException {
         SqlTracker tracker = new SqlTracker(connection);
         Item item1 = new Item("item1");
-        Item item2 = new Item("item2");
-        Item item3 = new Item("item3");
         tracker.add(item1);
-        tracker.add(item1);
-        tracker.add(item2);
-        tracker.add(item3);
-        Item result = tracker.findById(item3.getId());
-        assertThat(result.getName(), is(item3.getName()));
+        Item result = tracker.findById(item1.getId());
+        assertThat(result.getName(), is(item1.getName()));
     }
 
 }
