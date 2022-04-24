@@ -138,4 +138,4 @@
 
         Hibernate 
 0. Конфигурация Hibernate [#6872]
-1. 1. HbmTracker. [#287705]
+1. 1. HbmTracker. [#287705]-
