@@ -58,6 +58,7 @@ public class HibernateRun {
         session.delete(item);
         session.getTransaction().commit();
         session.close();
+        return;
     }
 
     public static List<Item> findAll(SessionFactory sf) {
